@@ -428,8 +428,7 @@ def main():
 
                                         st.markdown("---")
                                         st.markdown(
-                                            f"### 🧾 Predicción NN: **{pred_label}** "
-                                            f"({probs[idx_max] * 100:.1f}% de probabilidad)"
+                                            f"### Predicción NN: **{pred_label}** "
                                         )
 
                                         df_probs = pd.DataFrame(
@@ -443,8 +442,8 @@ def main():
                                             range_y=[0, 1],
                                             title="Distribución de probabilidad por clase (NN)",
                                         )
-                                        fig_bar.update_yaxes(title="Probabilidad")
-                                        st.plotly_chart(fig_bar, use_container_width=True)
+                                        #fig_bar.update_yaxes(title="Probabilidad")
+                                        #st.plotly_chart(fig_bar, use_container_width=True)
 
                                         st.dataframe(df_probs.set_index("Clase"))
 
@@ -465,7 +464,7 @@ def main():
         df_markov[STATE_COL] = pd.cut(
             df_markov["Engagement"],
             bins=n_states,
-            labels=[f"S{i+1}" for i in range(n_states)],
+            labels=[f"{i+1}" for i in range(n_states)],
             include_lowest=True,
         )
 
@@ -612,6 +611,8 @@ def main():
             )
             fig_bar.update_traces(texttemplate="%{y:.2%}", textposition="outside")
             fig_bar.update_yaxes(title="Probabilidad")
+            # Color de barras a rojo
+            fig_bar.update_traces(marker_color="red")
             st.plotly_chart(fig_bar, use_container_width=True)
 
 
